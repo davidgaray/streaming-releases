@@ -1,0 +1,13 @@
+{
+ "code": {
+  "file": "code-2026.11.08-343d6c9.tar.gz",
+  "sha256": "64a263112a4869aff9ca41a7fdb316b68c3fb86aa5ede19cdc55627b613e7203",
+  "version": "2026.11.08-343d6c9"
+ },
+ "published": 1794176236,
+ "rules": {
+  "file": "rules-2026-11-08.1.json",
+  "sha256": "b8fc75c7ebecc95d89f6b373f9839cbad069b813fad6dc7e0f74ed517797d67a",
+  "version": "2026-11-08.1"
+ }
+}

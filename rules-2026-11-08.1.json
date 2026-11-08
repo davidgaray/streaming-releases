@@ -1,0 +1,60 @@
+{
+  "version": "2026-11-08.1",
+  "_doc": "Site-specific patterns the stick uses. Edit + release to update every stick without new code (see resolver/README.md). Regexes are Python syntax.",
+
+  "crawl": {
+    "card_live_class": "m-card--live",
+    "live_state": "data-state=\"live\"",
+    "ended": "data-state=\"(?:ended|finished)\"",
+    "gate_state": "data-state=\"gate\"",
+    "pro_gate": "showProGate\\s*:\\s*true",
+    "time_until_start": "timeUntilStart\\s*:\\s*(-?\\d+)"
+  },
+
+  "iframe_exclude": "about:blank|sso-frame|chat|twitch\\.tv|^javascript:",
+  "max_depth": 4,
+
+  "chains": [
+    {
+      "name": "edge_token",
+      "type": "edge_token",
+      "_doc": "dembed.st player (Nov 2026): manifest + IP-bound token from the edge; Origin required, Referer refused.",
+      "detect": "const (?:SRC|EDGE) *= *\"",
+      "src": "const SRC *= *\"([^\"]*\\.m3u8[^\"]*)\"",
+      "edge": "const EDGE *= *\"([^\"]+)\"",
+      "channel": "const CHANNEL *= *\"([^\"]+)\"",
+      "token_path": "fetch\\(EDGE *\\+ *'([^']+)' *\\+ *encodeURIComponent\\(CHANNEL\\)",
+      "token_path_default": "/api/playlist-token?slug=",
+      "token_field": "token",
+      "ttl_field": "ttl",
+      "ttl_default": 120
+    },
+    {
+      "name": "vttp",
+      "type": "vttp",
+      "_doc": "NflStreamEmbed.php (Nov 2026): playlists over a websocket; the relay's /vttp.m3u8 runs it (se-site/vttp.py).",
+      "detect": "var vttpUrl",
+      "require": "window\\.masterinf"
+    },
+    {
+      "name": "legacy_hls_php",
+      "type": "hls_php",
+      "_doc": "streame*.center chNN.php (Sept-Oct 2026): hls.php bootstrap with the manifest in plain JS; Referer = iframe origin.",
+      "detect": "hls\\.php\\?stream=[A-Za-z0-9]+",
+      "hls_url": "(?:https?:)?//[^\"' ]*hls\\.php\\?stream=[A-Za-z0-9]+",
+      "stream_url": "const streamUrl = \"([^\"]+)\""
+    }
+  ],
+
+  "rate_limit": {
+    "_doc": "se-site/ratelimit.py: the stream site's request spacing + backoff after a 429. Players/CDNs aren't throttled.",
+    "hosts": "streameast",
+    "min_interval_s": 1.5,
+    "backoff_base_s": 120,
+    "backoff_max_s": 1800
+  },
+
+  "transport": {
+    "png_magic": "TIKTIKPX"
+  }
+}
