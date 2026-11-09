@@ -1,13 +1,13 @@
 {
  "code": {
-  "file": "code-2026.11.08-7cc0729.tar.gz",
-  "sha256": "f6e3a641c2c67aed2eca00cc93f5b0343003296a2c13d8085c03bf92802115fa",
-  "version": "2026.11.08-7cc0729"
+  "file": "code-2026.11.08-fd34395.tar.gz",
+  "sha256": "9c101ddcc9612f28eb65c35907d9e87632fc3c79c562debcc6240066478160bc",
+  "version": "2026.11.08-fd34395"
  },
- "published": 1794185960,
+ "published": 1794187004,
  "rules": {
-  "file": "rules-2026-11-08.1.json",
-  "sha256": "b8fc75c7ebecc95d89f6b373f9839cbad069b813fad6dc7e0f74ed517797d67a",
-  "version": "2026-11-08.1"
+  "file": "rules-2026-11-08.2.json",
+  "sha256": "05b9dc43d3915afc90ab72f5a6b3023901c431c7265aac074882975fb3af1458",
+  "version": "2026-11-08.2"
  }
 }
